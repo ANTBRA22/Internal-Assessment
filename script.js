@@ -1,5 +1,5 @@
 const draggables = document.querySelectorAll('.draggable')
-const containers = document.querySelectorAll('.container')
+const containers = document.querySelectorAll('#player_holder')
 
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {
@@ -36,4 +36,22 @@ function getDragAfterElement(container, y) {
       return closest
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element
+}
+
+function save() {
+
+  var player_holder = document.getElementById("player_holder")
+  for (let i=1; i<=12; i++) {
+
+    localStorage.setItem(i.toString(), player_holder.children.item(i-1).value)
+  }
+}
+
+window.onload = function() {
+  for (let i=1; i<=12; i++) {
+    var item = localStorage.getItem(i.toString())
+    if (item != null) {
+      document.getElementById(i.toString()).value = item;
+    }
+  }
 }
